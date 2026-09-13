@@ -1,0 +1,54 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: |
+          npm install --no-audit --no-fund
+          cd packages/pages && npm install --no-audit --no-fund
+          cd ../workers && npm install --no-audit --no-fund
+          cd ../db && npm install --no-audit --no-fund
+
+      - name: Type Check (Frontend)
+        run: |
+          cd packages/pages
+          npx tsc --noEmit
+
+      - name: Type Check (Workers)
+        run: |
+          cd packages/workers
+          npx tsc --noEmit
+
+      - name: Build Frontend
+        run: |
+          cd packages/pages
+          npm run build
+
+      - name: Build Workers
+        run: |
+          cd packages/workers
+          npm run build
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: |
+            packages/pages/dist
+            packages/workers/dist

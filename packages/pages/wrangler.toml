@@ -1,0 +1,18 @@
+name = "lonecrafts-pages"
+type = "javascript"
+compatibility_date = "2024-01-15"
+
+[build]
+command = "npm install && npm run build"
+cwd = "."
+destination = "public"
+
+[env.production]
+name = "lonecrafts-pages-prod"
+route = "lonecrafts.com/*"
+zone_id = ""
+
+[env.staging]
+name = "lonecrafts-pages-staging"
+route = "staging.lonecrafts.com/*"
+zone_id = ""

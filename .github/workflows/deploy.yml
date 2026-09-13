@@ -1,0 +1,53 @@
+name: Cloudflare Deployment
+
+on:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: |
+          npm install --no-audit --no-fund
+          cd packages/pages && npm install --no-audit --no-fund
+          cd ../workers && npm install --no-audit --no-fund
+          cd ../db && npm install --no-audit --no-fund
+
+      - name: Install Wrangler CLI
+        run: npm install -g wrangler
+
+      - name: Login to Cloudflare
+        run: wrangler login --access-token ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Set Cloudflare Secrets
+        run: |
+          echo "${{ secrets.ADMIN_PASSWORD }}" | wrangler secret put ADMIN_PASSWORD
+          echo "${{ secrets.JWT_SECRET }}" | wrangler secret put JWT_SECRET
+
+      - name: Deploy Workers API
+        working-directory: packages/workers
+        run: wrangler deploy
+
+      - name: Deploy Frontend to Cloudflare Pages
+        working-directory: packages/pages
+        run: |
+          npm run build
+          npx cloudflare pages deployment create dist/index.html \
+            --project-name lonecrafts \
+            --account-id ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Apply Database Migrations
+        working-directory: packages/db
+        run: wrangler d1 migrations apply lonecrafts --remote

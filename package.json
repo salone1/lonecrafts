@@ -1,0 +1,21 @@
+{
+  "name": "lonecrafts",
+  "version": "1.0.0",
+  "description": "Cloudflare-based e-commerce and business management system for Lone Crafts",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/pages",
+    "packages/workers",
+    "packages/db"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces",
+    "build": "npm run build --workspaces",
+    "deploy": "npm run deploy --workspaces",
+    "lint": "npm run lint --workspaces"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  }
+}

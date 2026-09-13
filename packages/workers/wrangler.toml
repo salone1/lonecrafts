@@ -1,0 +1,32 @@
+name = "lonecrafts-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "lonecrafts-api-prod"
+route = "api.lonecrafts.com/*"
+zone_id = ""
+
+[env.staging]
+name = "lonecrafts-api-staging"
+route = "staging-api.lonecrafts.com/*"
+zone_id = ""
+
+[[d1_databases]]
+binding = "DB"
+database_name = "lonecrafts"
+database_id = ""
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "lonecrafts-media"
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "lonecrafts-prod"
+database_id = ""
+
+[[env.production.r2_buckets]]
+binding = "MEDIA"
+bucket_name = "lonecrafts-media-prod"

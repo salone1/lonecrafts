@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lone Crafts - Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-indigo-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold">🎨 Lone Crafts</div>
+            <div class="space-x-4">
+                <button onclick="showTab('catalog')" class="px-4 py-2 rounded hover:bg-indigo-700">Catalog</button>
+                <button onclick="showTab('admin')" class="px-4 py-2 rounded hover:bg-indigo-700">Admin</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Catalog View -->
+    <div id="catalog-tab" class="fade-in">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+            <h1 class="text-4xl font-bold mb-2">Our Products</h1>
+            <p class="text-gray-600 mb-8">Handcrafted items with custom pricing</p>
+            
+            <!-- Category Filter -->
+            <div class="mb-8 flex gap-4">
+                <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg">All</button>
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Jewelry</button>
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Home Decor</button>
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Accessories</button>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Product Card 1 -->
+                <div class="bg-white rounded-lg shadow card-hover transition cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-indigo-200 to-purple-200 flex items-center justify-center">
+                        <span class="text-6xl">💎</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Handmade Necklace</h3>
+                        <p class="text-gray-600 text-sm mb-2">Premium beaded necklace with custom design</p>
+                        <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded">Tag #001</span>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="bg-white rounded-lg shadow card-hover transition cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-pink-200 to-orange-200 flex items-center justify-center">
+                        <span class="text-6xl">🏺</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Ceramic Vase</h3>
+                        <p class="text-gray-600 text-sm mb-2">Hand-thrown ceramic vase for home decoration</p>
+                        <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded">Tag #002</span>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="bg-white rounded-lg shadow card-hover transition cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-green-200 to-blue-200 flex items-center justify-center">
+                        <span class="text-6xl">👜</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Leather Bag</h3>
+                        <p class="text-gray-600 text-sm mb-2">Genuine leather crossbody bag with adjustable strap</p>
+                        <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded">Tag #003</span>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="bg-white rounded-lg shadow card-hover transition cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-yellow-200 to-pink-200 flex items-center justify-center">
+                        <span class="text-6xl">🎨</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Art Print</h3>
+                        <p class="text-gray-600 text-sm mb-2">Limited edition print by local artist</p>
+                        <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded">Tag #004</span>
+                    </div>
+                </div>
+
+                <!-- Product Card 5 -->
+                <div class="bg-white rounded-lg shadow card-hover transition cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-purple-200 to-indigo-200 flex items-center justify-center">
+                        <span class="text-6xl">💍</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Silver Ring</h3>
+                        <p class="text-gray-600 text-sm mb-2">Sterling silver ring with intricate details</p>
+                        <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded">Tag #005</span>
+                    </div>
+                </div>
+
+                <!-- Product Card 6 -->
+                <div class="bg-white rounded-lg shadow card-hover transition cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-red-200 to-orange-200 flex items-center justify-center">
+                        <span class="text-6xl">🕯️</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Scented Candle</h3>
+                        <p class="text-gray-600 text-sm mb-2">Hand-poured candle with natural fragrance</p>
+                        <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded">Tag #006</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shopping Cart -->
+            <div class="bg-white rounded-lg shadow p-6 mb-8">
+                <h2 class="text-2xl font-bold mb-4">🛒 Your Cart</h2>
+                <div class="space-y-3 mb-4">
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                        <span>Handmade Necklace (Tag #001) × 1</span>
+                        <button class="text-red-600 hover:text-red-800">Remove</button>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                        <span>Leather Bag (Tag #003) × 1</span>
+                        <button class="text-red-600 hover:text-red-800">Remove</button>
+                    </div>
+                </div>
+                <button onclick="sendWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg">
+                    💬 Send via WhatsApp
+                </button>
+                <p class="text-gray-600 text-sm mt-3">We'll send you pricing and complete your order via WhatsApp</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin View -->
+    <div id="admin-tab" class="hidden">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+            <h1 class="text-4xl font-bold mb-2">Admin Dashboard</h1>
+            <p class="text-gray-600 mb-8">Manage products, customers, and billing</p>
+
+            <!-- Tabs -->
+            <div class="flex gap-4 mb-6 border-b">
+                <button onclick="showAdminTab('products')" class="px-4 py-3 font-bold text-indigo-600 border-b-2 border-indigo-600">Products</button>
+                <button onclick="showAdminTab('customers')" class="px-4 py-3 font-bold text-gray-600 hover:text-indigo-600">Customers</button>
+                <button onclick="showAdminTab('billing')" class="px-4 py-3 font-bold text-gray-600 hover:text-indigo-600">Billing</button>
+            </div>
+
+            <!-- Products Tab -->
+            <div id="products-tab">
+                <div class="mb-6">
+                    <button class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700">+ Add Product</button>
+                </div>
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <table class="w-full">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="px-6 py-3 text-left font-bold">Tag #</th>
+                                <th class="px-6 py-3 text-left font-bold">Name</th>
+                                <th class="px-6 py-3 text-left font-bold">Category</th>
+                                <th class="px-6 py-3 text-left font-bold">Status</th>
+                                <th class="px-6 py-3 text-left font-bold">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-t hover:bg-gray-50">
+                                <td class="px-6 py-3">#001</td>
+                                <td class="px-6 py-3">Handmade Necklace</td>
+                                <td class="px-6 py-3">Jewelry</td>
+                                <td class="px-6 py-3"><span class="bg-green-100 text-green-800 px-3 py-1 rounded">Active</span></td>
+                                <td class="px-6 py-3"><button class="text-blue-600 hover:underline">Edit</button> | <button class="text-red-600 hover:underline">Delete</button></td>
+                            </tr>
+                            <tr class="border-t hover:bg-gray-50">
+                                <td class="px-6 py-3">#002</td>
+                                <td class="px-6 py-3">Ceramic Vase</td>
+                                <td class="px-6 py-3">Home Decor</td>
+                                <td class="px-6 py-3"><span class="bg-green-100 text-green-800 px-3 py-1 rounded">Active</span></td>
+                                <td class="px-6 py-3"><button class="text-blue-600 hover:underline">Edit</button> | <button class="text-red-600 hover:underline">Delete</button></td>
+                            </tr>
+                            <tr class="border-t hover:bg-gray-50">
+                                <td class="px-6 py-3">#003</td>
+                                <td class="px-6 py-3">Leather Bag</td>
+                                <td class="px-6 py-3">Accessories</td>
+                                <td class="px-6 py-3"><span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded">Inactive</span></td>
+                                <td class="px-6 py-3"><button class="text-blue-600 hover:underline">Edit</button> | <button class="text-red-600 hover:underline">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Customers Tab -->
+            <div id="customers-tab" class="hidden">
+                <div class="mb-6">
+                    <button class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700">+ Add Customer</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="font-bold text-lg mb-2">Rajesh Kumar</h3>
+                        <p class="text-gray-600 text-sm mb-3">📞 +91-9876543210</p>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Total Bills:</span>
+                                <span class="font-bold">₹15,000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Paid:</span>
+                                <span class="font-bold text-green-600">₹10,000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Outstanding:</span>
+                                <span class="font-bold text-red-600">₹5,000</span>
+                            </div>
+                        </div>
+                        <button class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700">View Details</button>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="font-bold text-lg mb-2">Priya Sharma</h3>
+                        <p class="text-gray-600 text-sm mb-3">📞 +91-9876543211</p>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Total Bills:</span>
+                                <span class="font-bold">₹8,500</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Paid:</span>
+                                <span class="font-bold text-green-600">₹8,500</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Outstanding:</span>
+                                <span class="font-bold text-green-600">₹0</span>
+                            </div>
+                        </div>
+                        <button class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billing Tab -->
+            <div id="billing-tab" class="hidden">
+                <div class="mb-6">
+                    <button class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700">+ Create New Bill</button>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="font-bold text-lg mb-4">Recent Bills</h3>
+                    <div class="space-y-4">
+                        <div class="border rounded-lg p-4 hover:bg-gray-50">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <p class="font-bold">Bill #INV-2024-001</p>
+                                    <p class="text-gray-600 text-sm">Rajesh Kumar</p>
+                                </div>
+                                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded text-sm">Pending</span>
+                            </div>
+                            <div class="flex justify-between items-end mt-3 pt-3 border-t">
+                                <div class="text-sm">
+                                    <p class="text-gray-600">3 items • ₹15,000 total</p>
+                                    <p class="text-gray-600">Due: 2024-12-31</p>
+                                </div>
+                                <button class="bg-indigo-600 text-white px-4 py-2 rounded text-sm hover:bg-indigo-700">View Details</button>
+                            </div>
+                        </div>
+
+                        <div class="border rounded-lg p-4 hover:bg-gray-50">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <p class="font-bold">Bill #INV-2024-002</p>
+                                    <p class="text-gray-600 text-sm">Priya Sharma</p>
+                                </div>
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded text-sm">Paid</span>
+                            </div>
+                            <div class="flex justify-between items-end mt-3 pt-3 border-t">
+                                <div class="text-sm">
+                                    <p class="text-gray-600">2 items • ₹8,500 total</p>
+                                    <p class="text-gray-600">Paid on: 2024-11-28</p>
+                                </div>
+                                <button class="bg-gray-600 text-white px-4 py-2 rounded text-sm hover:bg-gray-700">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tab) {
+            document.getElementById('catalog-tab').classList.remove('hidden');
+            document.getElementById('admin-tab').classList.remove('hidden');
+            
+            if (tab === 'catalog') {
+                document.getElementById('admin-tab').classList.add('hidden');
+            } else {
+                document.getElementById('catalog-tab').classList.add('hidden');
+            }
+        }
+
+        function showAdminTab(tab) {
+            document.getElementById('products-tab').classList.add('hidden');
+            document.getElementById('customers-tab').classList.add('hidden');
+            document.getElementById('billing-tab').classList.add('hidden');
+            
+            document.getElementById(tab + '-tab').classList.remove('hidden');
+        }
+
+        function sendWhatsApp() {
+            alert('✅ In the live app, this will:\n1. Generate a formatted message with all cart items\n2. Redirect to WhatsApp\n3. Customer sends to your business\n\nExample message:\n🛒 Order from Lone Crafts:\n- Handmade Necklace (Tag #001) ×1\n- Leather Bag (Tag #003) ×1\n\nPlease provide pricing and confirm.');
+        }
+    </script>
+</body>
+</html>

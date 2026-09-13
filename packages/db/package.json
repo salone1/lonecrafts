@@ -1,0 +1,8 @@
+{
+  "name": "db",
+  "version": "1.0.0",
+  "description": "Cloudflare D1 database schemas",
+  "scripts": {
+    "migrate": "wrangler d1 migrations apply lonecrafts --remote"
+  }
+}
