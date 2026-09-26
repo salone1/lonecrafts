@@ -1,5 +1,6 @@
 import { Env } from '../index';
 import { checkAuth } from '../middleware/auth';
+import { uploadToTigris } from '../storage/tigris';
 
 export const productRoutes = {
   listPublic: async (request: Request, env: Env) => {
@@ -24,7 +25,7 @@ export const productRoutes = {
   },
 
   listAdmin: async (request: Request, env: Env) => {
-    if (!checkAuth(request)) {
+    if (!await checkAuth(request, env)) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 
@@ -38,7 +39,7 @@ export const productRoutes = {
   },
 
   create: async (request: Request, env: Env) => {
-    if (!checkAuth(request)) {
+    if (!await checkAuth(request, env)) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 
@@ -53,7 +54,7 @@ export const productRoutes = {
     if (image) {
       const key = `products/${Date.now()}-${image.name}`;
       const buffer = await image.arrayBuffer();
-      await env.MEDIA.put(key, buffer);
+      await uploadToTigris(env, key, buffer);
       imageUrl = key;
     }
 
@@ -69,7 +70,7 @@ export const productRoutes = {
   },
 
   update: async (request: Request, env: Env) => {
-    if (!checkAuth(request)) {
+    if (!await checkAuth(request, env)) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 
@@ -87,7 +88,7 @@ export const productRoutes = {
     if (image) {
       const key = `products/${Date.now()}-${image.name}`;
       const buffer = await image.arrayBuffer();
-      await env.MEDIA.put(key, buffer);
+      await uploadToTigris(env, key, buffer);
       updateQuery += ', image_url = ?';
       params.push(key);
     }
@@ -103,7 +104,7 @@ export const productRoutes = {
   },
 
   toggle: async (request: Request, env: Env) => {
-    if (!checkAuth(request)) {
+    if (!await checkAuth(request, env)) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 
@@ -120,11 +121,11 @@ export const productRoutes = {
   },
 
   delete: async (request: Request, env: Env) => {
-    if (!checkAuth(request)) {
+    if (!await checkAuth(request, env)) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 
-    const { id } = request.params as { id: string };
+    const { id } = (request as any).params as { id: string };
     await env.DB.prepare('DELETE FROM products WHERE id = ?').bind(id).run();
 
     return new Response(JSON.stringify({ success: true }), {

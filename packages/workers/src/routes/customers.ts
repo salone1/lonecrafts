@@ -3,7 +3,7 @@ import { checkAuth } from '../middleware/auth';
 
 export const customerRoutes = {
   list: async (request: Request, env: Env) => {
-    if (!checkAuth(request)) {
+    if (!await checkAuth(request, env)) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 
@@ -29,7 +29,7 @@ export const customerRoutes = {
   },
 
   create: async (request: Request, env: Env) => {
-    if (!checkAuth(request)) {
+    if (!await checkAuth(request, env)) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 
@@ -47,7 +47,7 @@ export const customerRoutes = {
   },
 
   getOne: async (request: Request, env: Env) => {
-    if (!checkAuth(request)) {
+    if (!await checkAuth(request, env)) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 

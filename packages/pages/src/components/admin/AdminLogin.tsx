@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function AdminLogin() {
+interface Props {
+  onLogin: (token: string) => void;
+}
+
+export default function AdminLogin({ onLogin }: Props) {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -16,6 +20,7 @@ export default function AdminLogin() {
       if (res.ok) {
         const { token } = await res.json();
         localStorage.setItem('adminToken', token);
+        onLogin(token);
         navigate('/admin/products');
       } else {
         alert('Invalid password');

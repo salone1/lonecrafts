@@ -4,12 +4,26 @@
 
 Built specifically for Lone Crafts to provide a customer-facing product catalog, comprehensive admin panel, and flexible billing system with WhatsApp integration.
 
-## 🚀 Quick Links
+## 🚀 Quick Start
 
-- **👉 [GETTING_STARTED.md](./GETTING_STARTED.md)** - Start here! Follow the checklist.
-- **📋 [PROJECT_SUMMARY.md](./PROJECT_SUMMARY.md)** - Complete overview of what's been built
-- **🏗️ [ARCHITECTURE.md](./ARCHITECTURE.md)** - System architecture and data flow
-- **📖 [DEVELOPMENT.md](./DEVELOPMENT.md)** - Developer guide and examples
+\`\`\`bash
+# 1. Install dependencies
+npm install
+
+# 2. Configure environment
+cp .env.example .env
+# Then edit .env with your Cloudflare details
+
+# 3. Login to Cloudflare (opens browser)
+wrangler login
+
+# 4. Create D1 database
+wrangler d1 create lonecrafts
+# Copy the database ID into packages/workers/wrangler.toml
+
+# 5. Deploy
+npm run deploy
+\`\`\`
 
 ## ✨ Key Features
 
@@ -69,7 +83,7 @@ Built specifically for Lone Crafts to provide a customer-facing product catalog,
 | **State** | Zustand |
 | **Backend** | Cloudflare Workers + Node.js |
 | **Database** | Cloudflare D1 (SQLite) |
-| **Storage** | Cloudflare R2 |
+| **Storage** | **Tigris Object Storage** (replaces Cloudflare R2) |
 | **Build** | Vite |
 | **Deployment** | Cloudflare Pages |
 
@@ -77,36 +91,44 @@ Built specifically for Lone Crafts to provide a customer-facing product catalog,
 
 ```
 lonecrafts/
-├── GETTING_STARTED.md       ← 👈 Start here!
-├── QUICKSTART.md
-├── CLOUDFLARE_SETUP.md
-├── DEPLOYMENT.md
-├── DEVELOPMENT.md
-├── ARCHITECTURE.md
-├── PROJECT_SUMMARY.md
+├── README.md                 # This file
+├── deploy.ps1               # Deployment script
+├── .env                     # Environment configuration
+├── .env.example             # Environment template
+├── .gitignore               # Git rules
+├── package.json             # Workspace config
+├── tsconfig.json            # TypeScript config
 │
 ├── packages/
-│   ├── pages/              # React frontend
-│   │   └── src/
-│   │       ├── components/ # UI components
-│   │       ├── utils/      # Utilities
-│   │       └── config.ts   # API config
+│   ├── pages/               # React frontend
+│   │   ├── src/
+│   │   │   ├── components/  # UI components
+│   │   │   │   ├── catalog/   # Product browsing + cart
+│   │   │   │   └── admin/     # Admin dashboard
+│   │   │   ├── utils/       # API client + helpers
+│   │   │   ├── config.ts    # API configuration
+│   │   │   ├── store.ts     # Zustand state
+│   │   │   ├── App.tsx      # Router setup
+│   │   │   └── main.tsx     # Entry point
+│   │   ├── index.html
+│   │   ├── package.json
+│   │   ├── vite.config.ts
+│   │   ├── tailwind.config.js
+│   │   └── wrangler.toml
 │   │
-│   ├── workers/            # Cloudflare Workers API
-│   │   └── src/
-│   │       ├── routes/     # API endpoints
-│   │       └── middleware/ # Auth
+│   ├── workers/             # Cloudflare Workers API
+│   │   ├── src/
+│   │   │   ├── routes/      # API endpoints (auth, products, customers, billing, settings)
+│   │   │   ├── middleware/  # JWT auth
+│   │   │   └── index.ts     # Router
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── wrangler.toml
 │   │
-│   └── db/                 # Database
-│       └── migrations/     # SQL schemas
-│
-├── docs/
-│   ├── api.md              # API reference
-│   ├── schema.md           # Database schema
-│   ├── auth.md             # Authentication
-│   └── features.md         # Feature guide
-│
-└── .env.example            # Environment template
+│   └── db/                  # Database
+│       ├── migrations/
+│       │   └── 001_init_schema.sql  # Schema (5 tables)
+│       └── package.json
 ```
 
 ## ⚡ Getting Started
@@ -124,7 +146,7 @@ npm install
 ### 2. Setup Cloudflare
 Follow [CLOUDFLARE_SETUP.md](./CLOUDFLARE_SETUP.md) to:
 - Create D1 database
-- Create R2 bucket
+- Create Tigris bucket
 - Configure secrets
 
 ### 3. Local Development
@@ -258,8 +280,8 @@ Using Cloudflare's free/cheap tiers:
 - Apply migrations: `wrangler d1 migrations apply lonecrafts --remote`
 
 **Images not uploading?**
-- Check R2 bucket name in wrangler.toml
-- Verify R2 permissions
+- Check Tigris bucket name in wrangler.toml
+- Verify Tigris permissions
 
 **Admin login fails?**
 - Verify ADMIN_PASSWORD secret matches exactly

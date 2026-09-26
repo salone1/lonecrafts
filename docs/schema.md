@@ -12,7 +12,7 @@ Stores all product information
 | name | TEXT | NOT NULL | Product name |
 | description | TEXT | - | Product description |
 | category | TEXT | NOT NULL | Product category |
-| image_url | TEXT | - | R2 bucket path to product image |
+| image_url | TEXT | - | Tigris bucket path to product image |
 | active | INTEGER | DEFAULT 1 | Active status (0=hidden, 1=active) |
 | created_at | TEXT | NOT NULL | Creation timestamp |
 | updated_at | TEXT | DEFAULT CURRENT_TIMESTAMP | Last update timestamp |

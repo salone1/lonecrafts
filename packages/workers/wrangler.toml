@@ -16,17 +16,15 @@ zone_id = ""
 [[d1_databases]]
 binding = "DB"
 database_name = "lonecrafts"
-database_id = ""
-
-[[r2_buckets]]
-binding = "MEDIA"
-bucket_name = "lonecrafts-media"
+database_id = "deaf0edd-2632-437f-b915-677265ec6d55"
 
 [[env.production.d1_databases]]
 binding = "DB"
 database_name = "lonecrafts-prod"
-database_id = ""
+database_id = "deaf0edd-2632-437f-b915-677265ec6d55"
 
-[[env.production.r2_buckets]]
-binding = "MEDIA"
-bucket_name = "lonecrafts-media-prod"
+# Tigris Object Storage bindings (configured via wrangler secrets)
+# Set these values using: wrangler secret put TIGRIS_ENDPOINT_URL
+# wrangler secret put TIGRIS_ACCESS_KEY_ID
+# wrangler secret put TIGRIS_SECRET_ACCESS_KEY
+# wrangler secret put TIGRIS_BUCKET

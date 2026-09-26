@@ -8,7 +8,7 @@
 - View product details including:
   - Unique tag number
   - Product name and description
-  - Product images from Cloudflare R2
+  - Product images from Tigris Object Storage
   - NO pricing information displayed
 
 ### Shopping Cart
@@ -191,14 +191,14 @@ For each customer view:
 ## Data Management
 
 ### Image Storage
-- All product images stored in Cloudflare R2
+- All product images stored in Tigris Object Storage
 - Upload directly from phone or computer
 - Auto-scaling and optimization
 - Secure URLs for customer viewing
 
 ### Backup & Security
 - Cloudflare D1 provides automatic backups
-- R2 storage has versioning capability
+- Tigris storage has versioning capability
 - Data encrypted at rest
 - Access controlled via authentication
 

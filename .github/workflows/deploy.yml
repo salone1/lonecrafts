@@ -35,6 +35,12 @@ jobs:
         run: |
           echo "${{ secrets.ADMIN_PASSWORD }}" | wrangler secret put ADMIN_PASSWORD
           echo "${{ secrets.JWT_SECRET }}" | wrangler secret put JWT_SECRET
+          echo "${{ secrets.WHATSAPP_NUMBER }}" | wrangler secret put WHATSAPP_NUMBER
+          echo "${{ secrets.WHATSAPP_NUMBER_ADDITIONAL }}" | wrangler secret put WHATSAPP_NUMBER_ADDITIONAL
+          echo "${{ secrets.TIGRIS_ENDPOINT_URL }}" | wrangler secret put TIGRIS_ENDPOINT_URL
+          echo "${{ secrets.TIGRIS_ACCESS_KEY_ID }}" | wrangler secret put TIGRIS_ACCESS_KEY_ID
+          echo "${{ secrets.TIGRIS_SECRET_ACCESS_KEY }}" | wrangler secret put TIGRIS_SECRET_ACCESS_KEY
+          echo "${{ secrets.TIGRIS_BUCKET }}" | wrangler secret put TIGRIS_BUCKET
 
       - name: Deploy Workers API
         working-directory: packages/workers

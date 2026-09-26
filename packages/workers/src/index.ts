@@ -9,16 +9,17 @@ import { settingsRoutes } from './routes/settings';
 interface D1Database {
   prepare(query: string): any;
 }
-interface R2Bucket {
-  put(key: string, value: ArrayBuffer | ReadableStream): Promise<any>;
-}
 
 export interface Env {
   DB: D1Database;
-  MEDIA: R2Bucket;
   ADMIN_PASSWORD: string;
   WHATSAPP_NUMBER: string;
+  WHATSAPP_NUMBER_ADDITIONAL: string;
   JWT_SECRET: string;
+  TIGRIS_ENDPOINT_URL: string;
+  TIGRIS_ACCESS_KEY_ID: string;
+  TIGRIS_SECRET_ACCESS_KEY: string;
+  TIGRIS_BUCKET: string;
 }
 
 const router = Router();

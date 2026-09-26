@@ -1,9 +1,9 @@
-﻿import { Env } from '../index';
+import { Env } from '../index';
 import { checkAuth } from '../middleware/auth';
 
 export const billingRoutes = {
   list: async (request: Request, env: Env) => {
-    if (!checkAuth(request)) {
+    if (!await checkAuth(request, env)) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 
@@ -29,7 +29,7 @@ export const billingRoutes = {
   },
 
   getCustomerBills: async (request: Request, env: Env) => {
-    if (!checkAuth(request)) {
+    if (!await checkAuth(request, env)) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 
@@ -55,7 +55,7 @@ export const billingRoutes = {
   },
 
   create: async (request: Request, env: Env) => {
-    if (!checkAuth(request)) {
+    if (!await checkAuth(request, env)) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 
@@ -98,7 +98,7 @@ export const billingRoutes = {
   },
 
   getOne: async (request: Request, env: Env) => {
-    if (!checkAuth(request)) {
+    if (!await checkAuth(request, env)) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 
@@ -131,7 +131,7 @@ export const billingRoutes = {
   },
 
   addPayment: async (request: Request, env: Env) => {
-    if (!checkAuth(request)) {
+    if (!await checkAuth(request, env)) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 

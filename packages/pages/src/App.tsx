@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ProductGrid } from './components/catalog/ProductGrid';
 import { Cart } from './components/catalog/Cart';
@@ -10,36 +10,21 @@ import './App.css';
 
 function App() {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [adminToken, setAdminToken] = useState(localStorage.getItem('adminToken') || '');
 
-  const handleAdminLogin = async () => {
-    const password = prompt('Enter admin password:');
-    if (!password) return;
-
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-      });
-
-      if (response.ok) {
-        const { token } = await response.json();
-        localStorage.setItem('adminToken', token);
-        setAdminToken(token);
-        setIsAdmin(true);
-      } else {
-        alert('Invalid password');
-      }
-    } catch (error) {
-      console.error('Login failed:', error);
-      alert('Login failed');
+  useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (token) {
+      setIsAdmin(true);
     }
+  }, []);
+
+  const handleAdminLogin = (token: string) => {
+    localStorage.setItem('adminToken', token);
+    setIsAdmin(true);
   };
 
   const handleAdminLogout = () => {
     localStorage.removeItem('adminToken');
-    setAdminToken('');
     setIsAdmin(false);
   };
 
@@ -77,6 +62,9 @@ function App() {
                   <a href="/cart" className="text-blue-600 hover:text-blue-800">
                     Cart
                   </a>
+                  <a href="/admin-login" className="text-blue-600 hover:text-blue-800">
+                    Admin
+                  </a>
                 </>
               )}
             </div>
@@ -87,6 +75,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ProductGrid />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/admin-login" element={<AdminLogin onLogin={handleAdminLogin} />} />
           {isAdmin && (
             <>
               <Route path="/admin/products" element={<ProductManagement />} />
@@ -94,8 +83,6 @@ function App() {
               <Route path="/admin/billing" element={<BillingSystem />} />
             </>
           )}
-          {/* Hidden admin login route (not linked from nav) */}
-          <Route path="/admin-login" element={<AdminLogin />} />
         </Routes>
       </div>
     </Router>

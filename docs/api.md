@@ -32,19 +32,20 @@ List all active products
     "name": "Product Name",
     "description": "Product description",
     "category": "Category Name",
-    "imageUrl": "r2://bucket/path/to/image.jpg",
+    "imageUrl": "tigris://bucket/path/to/image.jpg",
     "active": true
   }
 ]
 ```
 
 ### GET /settings
-Get public settings (WhatsApp number)
+Get public settings (WhatsApp numbers)
 
 **Response:**
 ```json
 {
-  "whatsappNumber": "919876543210"
+  "whatsappNumber": "919906786291",
+  "additionalWhatsappNumber": "916006598481"
 }
 ```
 
@@ -101,7 +102,7 @@ Content-Type: multipart/form-data
   "name": "Product Name",
   "description": "Product description",
   "category": "Category Name",
-  "imageUrl": "r2://bucket/path/to/image.jpg",
+  "imageUrl": "tigris://bucket/path/to/image.jpg",
   "active": true
 }
 ```

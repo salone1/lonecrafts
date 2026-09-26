@@ -1,0 +1,7 @@
+name = "lonecrafts-db"
+compatibility_date = "2024-01-15"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "lonecrafts"
+database_id = "deaf0edd-2632-437f-b915-677265ec6d55"

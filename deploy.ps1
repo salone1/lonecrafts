@@ -8,7 +8,7 @@ param(
     [string]$Step = "all"
 )
 
-$projectRoot = "c:\Users\Dell\lonecrafts"
+$projectRoot = $PSScriptRoot
 $ErrorActionPreference = "Continue"
 
 function Write-Header {
@@ -99,17 +99,19 @@ function Setup-Cloudflare {
     Write-Info "2. Create D1 Database:"
     Write-Info "   - Run: wrangler d1 create lonecrafts-db"
     Write-Info "   - Note the database_id from output"
-    Write-Info "3. Create R2 Bucket:"
-    Write-Info "   - Go to https://dash.cloudflare.com/?to=/:account/r2"
-    Write-Info "   - Click 'Create bucket' and name it 'lonecrafts-images'"
-    Write-Info "4. Update wrangler.toml files with your IDs"
+    Write-Info "3. Create Tigris Bucket:"
+    Write-Info "   - Go to https://console.tigrisdata.com/"
+    Write-Info "   - Create a bucket named 'lonecrafts-media'"
+    Write-Info "   - Note your Tigris endpoint URL, access key ID, and secret access key"
+    Write-Info "4. Update wrangler.toml files and .env with your Tigris credentials"
     Write-Info "5. Set secrets:"
     Write-Info "   - wrangler secret put ADMIN_PASSWORD"
     Write-Info "   - wrangler secret put JWT_SECRET"
     Write-Info "   - wrangler secret put WHATSAPP_NUMBER"
-    Write-Info "6. Deploy:"
-    Write-Info "   - cd packages/workers && npm run deploy"
-    Write-Info "   - cd ../pages && npm run build && (upload dist/ to Cloudflare Pages)"
+    Write-Info "   - wrangler secret put TIGRIS_ENDPOINT_URL"
+    Write-Info "   - wrangler secret put TIGRIS_ACCESS_KEY_ID"
+    Write-Info "   - wrangler secret put TIGRIS_SECRET_ACCESS_KEY"
+    Write-Info "   - wrangler secret put TIGRIS_BUCKET"
     
     return $true
 }

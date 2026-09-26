@@ -4,7 +4,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   plugins: [react()],
   build: {
-    outDir: '../../dist/pages',
+    outDir: 'dist',
     emptyOutDir: true,
   },
   server: {

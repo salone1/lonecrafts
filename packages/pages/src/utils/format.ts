@@ -22,7 +22,7 @@ export const formatDateTime = (date: string | Date): string => {
   });
 };
 
-export const generateBillPDF = (bill: any): string => {
+export const generateBillPDF = (_bill: any): string => {
   // Placeholder for PDF generation
   // Use a library like jsPDF or pdfkit
   return 'PDF generation not implemented';

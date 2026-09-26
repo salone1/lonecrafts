@@ -1,6 +1,5 @@
 import { Env } from '../index';
-
-const JWT_EXPIRY = 24 * 60 * 60 * 1000; // 24 hours
+import { generateJWT, verifyJWT } from '../middleware/auth';
 
 export const authRoutes = {
   login: async (request: Request, env: Env) => {
@@ -33,22 +32,3 @@ export const authRoutes = {
     });
   },
 };
-
-async function generateJWT(payload: Record<string, any>, secret: string): Promise<string> {
-  const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
-  const body = btoa(JSON.stringify({ ...payload, iat: Date.now(), exp: Date.now() + JWT_EXPIRY }));
-  const signature = btoa(secret);
-
-  return `${header}.${body}.${signature}`;
-}
-
-async function verifyJWT(token: string, secret: string): Promise<boolean> {
-  const [_, body, signature] = token.split('.');
-
-  if (signature !== btoa(secret)) {
-    return false;
-  }
-
-  const payload = JSON.parse(atob(body));
-  return payload.exp > Date.now();
-}

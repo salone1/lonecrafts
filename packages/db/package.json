@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Cloudflare D1 database schemas",
   "scripts": {
+    "build": "node -e \"\"",
     "migrate": "wrangler d1 migrations apply lonecrafts --remote"
   }
 }

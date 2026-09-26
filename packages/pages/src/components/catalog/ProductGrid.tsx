@@ -26,7 +26,7 @@ export const ProductGrid = () => {
         setProducts(response.data);
         
         // Extract unique categories
-        const cats = [...new Set(response.data.map((p: Product) => p.category))];
+        const cats = [...new Set(response.data.map((p: Product) => p.category))] as string[];
         setCategories(cats);
       } catch (error) {
         console.error('Failed to fetch products:', error);
