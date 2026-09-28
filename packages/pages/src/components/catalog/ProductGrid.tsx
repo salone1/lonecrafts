@@ -14,6 +14,7 @@ interface Product {
 export const ProductGrid = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
 
@@ -28,8 +29,13 @@ export const ProductGrid = () => {
         // Extract unique categories
         const cats = [...new Set(response.data.map((p: Product) => p.category))] as string[];
         setCategories(cats);
-      } catch (error) {
+      } catch (error: any) {
         console.error('Failed to fetch products:', error);
+        setError(
+          error.response?.data?.error ||
+            error.message ||
+            'Failed to load products. Please check your connection.'
+        );
       } finally {
         setLoading(false);
       }
@@ -39,11 +45,26 @@ export const ProductGrid = () => {
   }, [selectedCategory]);
 
   if (loading) return <div className="text-center py-8">Loading products...</div>;
+  if (error) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-8">Lone Crafts Catalog</h1>
+        <div className="bg-red-50 border-l-4 border-red-500 p-6 mb-8">
+          <p className="text-red-700">
+            <strong>Error loading products:</strong> {error}
+          </p>
+          <p className="mt-2 text-sm text-gray-600">
+            Please ensure the API server is running and try refreshing the page.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-8">Lone Crafts Catalog</h1>
-      
+
       {/* Category Filter */}
       <div className="mb-8 flex gap-2 flex-wrap">
         <button
