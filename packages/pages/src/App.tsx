@@ -62,9 +62,6 @@ function App() {
                   <a href="/cart" className="text-blue-600 hover:text-blue-800">
                     Cart
                   </a>
-                  <a href="/admin-login" className="text-blue-600 hover:text-blue-800">
-                    Admin
-                  </a>
                 </>
               )}
             </div>
