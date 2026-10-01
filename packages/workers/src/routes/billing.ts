@@ -60,6 +60,27 @@ export const billingRoutes = {
     }
 
     const { customerId, items } = await request.json();
+
+    if (!customerId) {
+      return new Response(JSON.stringify({ error: 'Customer ID is required' }), { status: 400 });
+    }
+
+    if (!Array.isArray(items) || items.length === 0) {
+      return new Response(JSON.stringify({ error: 'Items array is required and cannot be empty' }), { status: 400 });
+    }
+
+    for (const item of items) {
+      if (!item.productId) {
+        return new Response(JSON.stringify({ error: 'Product ID is required for all items' }), { status: 400 });
+      }
+      if (!item.quantity || item.quantity <= 0) {
+        return new Response(JSON.stringify({ error: 'Quantity must be a positive number' }), { status: 400 });
+      }
+      if (!item.rate || item.rate < 0) {
+        return new Response(JSON.stringify({ error: 'Rate must be a non-negative number' }), { status: 400 });
+      }
+    }
+
     const billId = crypto.randomUUID();
     const billNumber = `BILL-${Date.now()}`;
     
@@ -138,6 +159,10 @@ export const billingRoutes = {
     const { id } = (request as any).params as { id: string };
     const { amount } = await request.json();
     const paymentId = crypto.randomUUID();
+
+    if (!amount || amount <= 0) {
+      return new Response(JSON.stringify({ error: 'Amount must be a positive number' }), { status: 400 });
+    }
 
     await env.DB.prepare(
       'INSERT INTO payments (id, bill_id, amount, created_at) VALUES (?, ?, ?, ?)'

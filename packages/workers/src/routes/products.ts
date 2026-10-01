@@ -50,6 +50,13 @@ export const productRoutes = {
     const category = formData.get('category');
     const image = formData.get('image') as File | null;
 
+    if (!name) {
+      return new Response(JSON.stringify({ error: 'Product name is required' }), { status: 400 });
+    }
+    if (!category) {
+      return new Response(JSON.stringify({ error: 'Category is required' }), { status: 400 });
+    }
+
     let imageUrl = '';
     if (image) {
       const key = `products/${Date.now()}-${image.name}`;
@@ -82,6 +89,10 @@ export const productRoutes = {
     const category = formData.get('category');
     const image = formData.get('image') as File | null;
 
+    if (!name && !tagNumber && !category) {
+      return new Response(JSON.stringify({ error: 'At least one field (name, tagNumber, category) is required' }), { status: 400 });
+    }
+
     let updateQuery = 'UPDATE products SET tag_number = ?, name = ?, description = ?, category = ?';
     const params: any[] = [tagNumber, name, description, category];
 
@@ -110,6 +121,10 @@ export const productRoutes = {
 
     const { id } = (request as any).params as { id: string };
     const { active } = await request.json();
+
+    if (typeof active !== 'boolean') {
+      return new Response(JSON.stringify({ error: 'Active must be a boolean' }), { status: 400 });
+    }
 
     await env.DB.prepare('UPDATE products SET active = ? WHERE id = ?')
       .bind(active ? 1 : 0, id)

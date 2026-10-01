@@ -44,16 +44,20 @@ jobs:
 
       - name: Deploy Workers API
         working-directory: packages/workers
-        run: wrangler deploy
+        run: wrangler deploy --env production
+
+      - name: Set API Base URL
+        working-directory: packages/pages
+        run: echo "VITE_API_URL=${{ secrets.API_URL }}" >> .env.production
 
       - name: Deploy Frontend to Cloudflare Pages
         working-directory: packages/pages
         run: |
           npm run build
-          npx cloudflare pages deployment create dist/index.html \
+          npx cloudflare pages publish dist \
             --project-name lonecrafts \
             --account-id ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Apply Database Migrations
         working-directory: packages/db
-        run: wrangler d1 migrations apply lonecrafts --remote
+        run: wrangler d1 migrations apply lonecrafts --remote --env production

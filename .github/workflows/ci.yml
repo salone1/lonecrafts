@@ -35,6 +35,9 @@ jobs:
           cd packages/workers
           npx tsc --noEmit
 
+      - name: Set API Base URL
+        working-directory: packages/pages
+        run: echo "VITE_API_URL=" >> .env.production
       - name: Build Frontend
         run: |
           cd packages/pages

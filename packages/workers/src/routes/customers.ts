@@ -28,12 +28,17 @@ export const customerRoutes = {
     });
   },
 
-  create: async (request: Request, env: Env) => {
+create: async (request: Request, env: Env) => {
     if (!await checkAuth(request, env)) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
 
-    const { name, email, phone } = await request.json();
+        const { name, email, phone } = await request.json();
+
+    if (!name) {
+      return new Response(JSON.stringify({ error: 'Customer name is required' }), { status: 400 });
+    }
+
     const id = crypto.randomUUID();
 
     await env.DB.prepare(

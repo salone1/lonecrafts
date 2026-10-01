@@ -5,6 +5,12 @@ export const authRoutes = {
   login: async (request: Request, env: Env) => {
     const { password } = await request.json();
 
+    if (!password) {
+      return new Response(JSON.stringify({ error: 'Password is required' }), {
+        status: 400,
+      });
+    }
+
     if (password !== env.ADMIN_PASSWORD) {
       return new Response(JSON.stringify({ error: 'Invalid password' }), {
         status: 401,

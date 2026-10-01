@@ -28,10 +28,11 @@ database_id = "deaf0edd-2632-437f-b915-677265ec6d55"
 # wrangler secret put TIGRIS_ACCESS_KEY_ID
 # wrangler secret put TIGRIS_SECRET_ACCESS_KEY
 # wrangler secret put TIGRIS_BUCKET
-  # Environment variables - Set these using: wrangler secret put SECRET_NAME
-  # During local development, these values come from .env file
-  [env.production.vars]
-  ADMIN_PASSWORD = "pass@sana1"
-  JWT_SECRET = "9a4e1caedd21c167f6fd4265a58af462fd53c09d3078d37948631642761b2cfd"
-  WHATSAPP_NUMBER = "919906786291"
-  WHATSAPP_NUMBER_ADDITIONAL = "916006598481"
+
+# Environment variables - Set these using: wrangler secret put SECRET_NAME
+# During local development, these values come from .env file
+[env.production.vars]
+ADMIN_PASSWORD = ""
+JWT_SECRET = ""
+WHATSAPP_NUMBER = ""
+WHATSAPP_NUMBER_ADDITIONAL = ""
